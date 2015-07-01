@@ -4,7 +4,7 @@ use strict;
 use POSIX qw(strftime);
 
 
-#die "perl $0 <input URL>\nOutput: <input.conditionFormat.csv>\nThe output file needs to bzip then to be used for importing\n" unless @ARGV;
+#die "perl $0 <input URL>\nOutput: <input.conditionFormat.bz2>\n" unless @ARGV;
 
 my $CGDURL = 'http://research.nhgri.nih.gov/CGD/download/txt/CGD.txt.gz';
 
