@@ -158,7 +158,8 @@ sub output () {
 #			                $output_r->{"$condition"}->{"HGNCIDs"}."  ".
 #			                $output_r->{"$condition"}->{"ENTREZGeneID"}."  ".
 #			                $output_r->{"$condition"}->{"AgeGroups"}."  ".
-					$output_r->{"$condition"}->{"description"}."\t".		#description
+					#$output_r->{"$condition"}->{"description"}."\t".		#description
+					''."\t".													#we don't output descript for now.
 					"\n";													#penetrance
 		} else {
 			print "Error: $condition were not found.\n";
