@@ -209,6 +209,7 @@ sub read_CGD () {
 				$condition =~ s/;;/;/g;
 				if ($condition eq "") { next;}
 
+                           # output structure , condition key, content to bin, col in the output struture, prefix
 				&binTerms ($output_r, $condition, $gene, "geneSymbols", "");
 				&binTerms ($output_r, $condition, $content{$gene}->{"HGNC ID"}, "HGNCIDs", "");
 				&binTerms ($output_r, $condition, $content{$gene}->{"ENTREZ GENE ID"}, "ENTREZGeneID", "");
