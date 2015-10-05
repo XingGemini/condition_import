@@ -34,6 +34,81 @@ print "output $CGD_out\n";
 my %content = ();
 my %output = ();
 
+
+my %GENENAMEMAP = (
+	"MT-ATP8"	=> "ATP8",
+	"MT-TL1"	=> "TRNL1",
+	"PRIMPOL"	=> "CCDC111",
+	"KLHL41"	=> "KBTBD10",
+	"C8ORF37"	=> "C8orf37",
+	"MT-TS1"	=> "TRNS1",
+	"MT-CO1"	=> "COX1",
+	"MT-ND1"	=> "ND1",
+	"MT-RNR1"	=> "RNR1",
+	"MT-TE"		=> "TRNE",
+	"BCO1"		=> "BCMO1",
+	"C19ORF12"	=> "C19orf12",
+	"POMK"		=> "SGK196",
+	"C5ORF42"	=> "C5orf42",
+	"KIF1BP"	=> "KIAA1279",
+	"POMGNT2"	=> "GTDC2",
+	#"TRAC"		=> "",
+	"MT-TF"		=> "TRNF",
+	"ADGRG1"	=> "GPR56",
+	"UQCC3"		=> "C11orf83",
+	"NSMF"		=> "NELF",
+	"MT-ATP6"	=> "ATP6",
+	"MT-CO3"	=> "COX3",
+	"DNAAF5"	=> "HEATR2",
+	"ANOS1"		=> "KAL1",
+	"MT-ND5"	=> "ND5",
+	"MT-ND6"	=> "ND6",
+	"MT-TC"		=> "TRNC",
+	"CEP83"		=> "CCDC41",
+	"C12ORF65"	=> "C12orf65",
+	"MT-RNR2"	=> "RNR2",
+	#"FSHMD1A"	=> "",
+	"P3H1"		=> "LEPRE1",
+	"KLHL40"	=> "KBTBD5",
+	"KIZ"		=> "PLK1S1",
+	"SUGCT"		=> "C7orf10",
+	"P3H2"		=> "LEPREL1",
+	"SC5D"		=> "SC5DL",
+	"ADGRV1"	=> "GPR98",
+	#"PDZD7"		=> "",
+	"ADGRG1"	=> "C2orf71",
+	"CFAP57"	=> "WDR65",
+	#"GRHL3"	=> "",
+	"MT-CO2"	=> "COX2",
+	"C21ORF59"	=> "C21orf59",
+	"MT-ND2"	=> "ND2",
+	"MT-ND4"	=> "ND4",
+	"MT-ND4L"	=> "ND4L",
+	"C12ORF65"	=> "C12orf65",
+	"CFAP53"	=> "CCDC11",
+	"PHYKPL"	=> "AGXT2L2",
+	"MT-ND3"	=> "ND3",
+	"KMT2A"		=> "MLL",
+	"IFNL3"		=> "IL28B",
+	#"IGHM"	=> "",
+	"B3GLCT"	=> "B3GALTL",
+	#"KCNJ18"	=> "",
+	"HNRNPDL"	=> "HNRPDL",
+	"NADK2"		=> "NADKD1",
+	#"IGKC"	=> "",
+	"AMER1"		=> "FAM123B",
+	"NT5C3A"	=> "NT5C3",
+	#"ATXN8"	=> "",
+	"B4GAT1"	=> "B3GNT1",
+	"KMT2D"		=> "MLL2",
+	"ACKR1"		=> "DARC",
+	"MGME1"		=> "C20orf72",
+	"UQCC2"		=> "MNF1",
+	"ERMARD"	=> "C6orf70",
+	"ZBTB18"	=> "ZNF238",
+	"LINS1"		=> "LINS"
+	);
+
 my %CATEGORIES = (
 	'allergy-immunology-infectious'=>'1',
 	'audiologic-otolaryngologic'=>'1',
@@ -193,10 +268,16 @@ sub read_CGD () {
 			my @line = split(/\t/, $_);
 			my $gene = $line[0];
 
+			if (exists $GENENAMEMAP{$gene}) {
+				$gene = $GENENAMEMAP{$gene};
+			}
+
+			$gene =~ s/ORF/orf/g;
+
 			for (my $i = 1; $i <= $#Col; $i++) {
 				$content{$gene}->{$Col[$i]} = $line[$i];
 
-				print "$gene $Col[$i] $line[$i] $content{$gene}->{$Col[$i]}\n" ;
+				print "gene $gene col $Col[$i] $line[$i] $content{$gene}->{$Col[$i]}\n" ;
 			}
 
 			my $d = ";";
